@@ -100,7 +100,7 @@ if __name__ == '__main__':
     runner = web.AppRunner(app, handle_signals=True)
     loop.run_until_complete(runner.setup())
 
-    loop.run_until_complete(web.TCPSite(runner, "localhost", 80).start())
-    # loop.run_until_complete(web.UnixSite(runner, "/tmp/apiproxy.sock").start())
+    # loop.run_until_complete(web.TCPSite(runner, "localhost", 80).start())
+    loop.run_until_complete(web.UnixSite(runner, "/tmp/apiproxy.sock").start())
 
     loop.run_forever()
