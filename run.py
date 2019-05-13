@@ -80,6 +80,9 @@ class ApiProxy():
 
         twitter_ret = await self.twitter.request('GET', "trends/place.json", params=params)
         trend_words = list(filter(lambda x: not x['name'].startswith('#'), twitter_ret[0]['trends']))
+        if len(trend_words) < 3:
+            return web.Response(status=404)
+
         ret = {i: trend_words[randint(0, len(trend_words)-1)]['name'] for i in range(3)}
 
         return web.json_response(ret)
