@@ -66,7 +66,9 @@ class ApiProxy():
 
         csv_lines = spotify_csv.split('\n')
         # print(csv_lines)
-        ret = {k: "{0[2]} の {0[1]}".format(v.split(',')) for k, v in enumerate(csv_lines[2:5])}
+        ret = {}
+        for i in range(3):
+            ret[i] = "{0[2]} の {0[1]}".format(csv_lines[randint(2, 50)].split(","))
 
         return web.json_response(ret)
 
@@ -90,7 +92,6 @@ class ApiProxy():
 
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()
-    routes = web.RouteTableDef()
     api = ApiProxy()
 
     app = web.Application()
